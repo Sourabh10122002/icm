@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICM Monitor</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body data-theme="dark">
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-main" id="header-main">
+                <h1 class="logo">ICM</h1>
+                <div class="header-controls">
+                    <button id="theme-toggle" class="icon-btn" title="Toggle Theme">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                        </svg>
+                    </button>
+                    <button id="settings-btn" class="icon-btn" title="Settings">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.39a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                            </path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="header-settings hidden-view" id="header-settings">
+                <button id="back-btn" class="icon-btn" title="Back">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6"></path>
+                    </svg>
+                </button>
+                <h3>Settings</h3>
+            </div>
+        </header>
+
+        <main>
+            <!-- Dashboard View -->
+            <section id="view-dashboard" class="active-view">
+                <div class="status-card" id="main-status-card">
+                    <div class="status-icon-large" id="status-icon-display">
+                        <!-- Dynamic SVG Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                            stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2A10 10 0 0 1 12 22 10 10 0 0 1 12 2Z" opacity="0" />
+                            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                            <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                        </svg>
+                    </div>
+                    <h2 id="status-text">Checking...</h2>
+                    <p id="status-subtext" class="subtext">Please wait</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="label">Ping</span>
+                        <div class="value-group">
+                            <span id="ping-value" class="value">--</span>
+                            <span class="unit">ms</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="label">Public IP</span>
+                        <div class="value-group">
+                            <span id="ip-value" class="value">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="label">Online For</span>
+                        <div class="value-group">
+                            <span id="online-for-value" class="value">--</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="label">Disconnects</span>
+                        <div class="value-group">
+                            <span id="disconnects-value" class="value">0</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="label">Availability</span>
+                        <div class="value-group">
+                            <span id="availability-value" class="value">--</span>
+                            <span class="unit">%</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="label">Downtime</span>
+                        <div class="value-group">
+                            <span id="downtime-value" class="value">--</span>
+                        </div>
+                    </div>
+                    <div class="metric-card speed-test-card">
+                        <span class="label">Download Speed</span>
+                        <div class="value-group">
+                            <span id="speed-value" class="value">--</span>
+                            <span class="unit">Mbps</span>
+                        </div>
+                        <button id="btn-speed-test" class="btn-xs" title="Run Speed Test">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="latency-chart" width="300" height="100"></canvas>
+                </div>
+            </section>
+
+            <!-- Logs View (Hidden by default) -->
+            <section id="view-logs" class="hidden-view">
+                <div class="section-header">
+                    <h3>Connection Log</h3>
+                    <div class="actions">
+                        <button id="export-csv" class="btn-small">CSV</button>
+                        <button id="clear-logs" class="btn-small">Clear</button>
+                    </div>
+                </div>
+                <div class="logs-list" id="logs-list">
+                    <!-- Log items -->
+                </div>
+            </section>
+
+            <!-- Settings View (Hidden by default) -->
+            <section id="view-settings" class="hidden-view">
+                <!-- Settings Form (Structure maintained) -->
+                <form id="settings-form">
+                    <div class="settings-group">
+                        <h4>Connectivity</h4>
+                        <div class="form-group">
+                            <label for="ping-preset">Ping Target</label>
+                            <select id="ping-preset">
+                                <option value="google">Google (generate_204)</option>
+                                <option value="cloudflare">Cloudflare (1.1.1.1)</option>
+                                <option value="baidu">Baidu</option>
+                                <option value="custom">Custom URL</option>
+                            </select>
+                        </div>
+                        <div class="form-group hidden" id="custom-url-group">
+                            <label for="ping-url">Custom URL</label>
+                            <input type="url" id="ping-url" placeholder="https://example.com" inputmode="url">
+                        </div>
+                        <div class="form-group">
+                            <label for="check-interval">Interval</label>
+                            <select id="check-interval">
+                                <option value="1000">1 Second (Aggressive)</option>
+                                <option value="2000">2 Seconds (Standard)</option>
+                                <option value="3000">3 Seconds</option>
+                                <option value="5000">5 Seconds (Battery Saver)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h4>Appearance</h4>
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="theme-select">UI Theme</label>
+                                <select id="theme-select">
+                                    <option value="dark">Dark Mode</option>
+                                    <option value="light">Light Mode</option>
+                                </select>
+                            </div>
+                            <div class="form-group half">
+                                <label for="precision-select">Precision</label>
+                                <select id="precision-select">
+                                    <option value="regular">Regular</option>
+                                    <option value="expert">Expert</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Icon Theme</label>
+                            <div id="icon-theme-grid" class="theme-grid">
+                                <!-- Generated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h4>Audio</h4>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="play-sounds">
+                                <label for="play-sounds">Play Sounds on Alert</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="volume-slider">Volume: <span id="volume-val">100%</span></label>
+                                <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="sound-profile">Sound Profile</label>
+                                <select id="sound-profile">
+                                    <option value="beep">Classic Beep</option>
+                                    <option value="futuristic">Futuristic</option>
+                                    <option value="8bit">Retro 8-Bit</option>
+                                    <option value="soft">Soft Chime</option>
+                                    <option value="voice">Voice (TTS)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h4>Data</h4>
+                            <div class="button-row">
+                                <button type="button" id="btn-clear-logs" class="btn-secondary">Clear Logs</button>
+                                <button type="button" id="btn-reset-stats" class="btn-secondary">Reset Stats</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Save Settings</button>
+                </form>
+            </section>
+        </main>
+
+        <!-- Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" data-target="view-dashboard">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="3" rx="2" />
+                    <line x1="8" x2="16" y1="21" y2="21" />
+                    <line x1="12" x2="12" y1="17" y2="21" />
+                </svg>
+                <span>Monitor</span>
+            </div>
+            <div class="nav-item" data-target="view-logs">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" x2="8" y1="13" y2="13" />
+                    <line x1="16" x2="8" y1="17" y2="17" />
+                    <line x1="10" x2="8" y1="9" y2="9" />
+                </svg>
+                <span>Logs</span>
+            </div>
+        </nav>
+    </div>
+    <script type="module" src="./script.js"></script>
+</body>
+
+</html>
