@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/logo-128.png" alt="ICM Logo" width="128">
+</p>
+
 # ICM - Internet Connection Monitor
 
 ICM (Internet Connection Monitor) is a browser extension designed to help you monitor your internet connectivity in real-time. Whether you are dealing with frequent disconnects or just want to track your network performance, ICM provides the tools you need.
